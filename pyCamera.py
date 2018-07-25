@@ -11,8 +11,8 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-while GPIO.input(5):
-    pass
+#while GPIO.input(5):
+#    pass
 
 sharpnessString = ""
 contrastString = ""
