@@ -28,7 +28,7 @@ def SharpnessCMD(value = 0):
     global sharpnessString
     if sharpnessActivate.get():
         sharpnessScale.config(state=DISABLED)
-        camera.sharpness(0)
+        camera.sharpness = 0
     else:
         sharpnessScale.config(state=NORMAL)
         camera.sharpness = sharpnessScale.get()
@@ -37,7 +37,7 @@ def ContrastCMD(value = 0):
     global contrastString
     if contrastActivate.get():
         contrastScale.config(state=DISABLED)
-        camera.contrast(0)
+        camera.contrast = 0
     else:
         contrastScale.config(state=NORMAL)
         camera.contrast = contrastScale.get()
@@ -46,7 +46,7 @@ def BrightnessCMD(value = 0):
     global brightnessString
     if brightnessActivate.get():
         brightnessScale.config(state=DISABLED)
-        camera.brightness(50)
+        camera.brightness = 50
     else:
         brightnessScale.config(state=NORMAL)
         camera.brightness = brightnessScale.get()
@@ -55,7 +55,7 @@ def SaturationCMD(value = 0):
     global saturationString
     if saturationActivate.get():
         saturationScale.config(state=DISABLED)
-        camera.saturation(0)
+        camera.saturation = 0
     else:
         saturationScale.config(state=NORMAL)
         camera.saturation = saturationScale.get()
@@ -64,7 +64,7 @@ def ISOCMD(value = 0):
     global isoString
     if isoActivate.get():
         isoScale.config(state=DISABLED)
-        camera.iso(200)
+        camera.iso = 200
     else:
         isoScale.config(state=NORMAL)
         camera.iso = isoScale.get()
