@@ -13,10 +13,8 @@ try:
     GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     print('check button are not pressed and connected')
-    while True:
-        print('in 3 = %s' %GPIO.input(3))
-        print('in 5 = %s' %GPIO.input(5))
-        sleep(1)
+    while GPIO.input(5):
+        pass
     print('Start program')
 except:
     print('error while setting up the raspberry')
