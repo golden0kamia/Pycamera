@@ -14,8 +14,9 @@ try:
 
     print('check button are not pressed and connected')
     while True:
-		print('in 3 = %s' %GPIO.input(3))
+        print('in 3 = %s' %GPIO.input(3))
         print('in 5 = %s' %GPIO.input(5))
+		sleep(1)
     print('Start program')
 except:
     print('error while setting up the raspberry')
