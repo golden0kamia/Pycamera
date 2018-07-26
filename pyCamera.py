@@ -29,6 +29,7 @@ foreGround = "red"
 vFlag = False
 
 def main():
+	startdisplay()
     print('start program')
     while True:
         if GPIO.input(5):
@@ -105,103 +106,105 @@ def Destroy():
 	GPIO.cleanup()
 	quit()
 
-window = Tk()
-window.attributes('-fullscreen', True)
+def startdisplay():
+	window = Tk()
+	window.attributes('-fullscreen', True)
 
-sharpnessActivate = BooleanVar()
-contrastActivate = BooleanVar()
-brightnessActivate = BooleanVar()
-saturationActivate = BooleanVar()
-isoActivate = BooleanVar()
-
-
-view = Frame(window, bg=backGround)
-view.pack(fill=BOTH, expand=1)
-
-sharpnessFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
-sharpnessFrame.grid(row=1, column=1, columnspan=2)
-
-sharpnessLabel = Label(sharpnessFrame, text="Sharpness", bg=backGround, fg=foreGround, padx=2)
-sharpnessLabel.grid(row=1, column=1)
-
-sharpnessScale = Scale(sharpnessFrame, length=300, from_=-100, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=SharpnessCMD)
-sharpnessScale.grid(row=1, column=2)
-sharpnessScale.set(0)
-sharpnessScale.config(state=DISABLED)
-
-sharpnessCheck = Checkbutton(sharpnessFrame, bg=backGround, fg=foreGround, text="Auto", command=SharpnessCMD, variable=sharpnessActivate)
-sharpnessCheck.grid(row=1, column=3)
-sharpnessCheck.select()
+	sharpnessActivate = BooleanVar()
+	contrastActivate = BooleanVar()
+	brightnessActivate = BooleanVar()
+	saturationActivate = BooleanVar()
+	isoActivate = BooleanVar()
 
 
-contrastFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
-contrastFrame.grid(row=2, column=1, columnspan=2)
+	view = Frame(window, bg=backGround)
+	view.pack(fill=BOTH, expand=1)
 
-contrastLabel = Label(contrastFrame, text="Contrast", bg=backGround, fg=foreGround, padx=6)
-contrastLabel.grid(row=1, column=1)
+	sharpnessFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
+	sharpnessFrame.grid(row=1, column=1, columnspan=2)
 
-contrastScale = Scale(contrastFrame, length=300, from_=-100, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=ContrastCMD)
-contrastScale.grid(row=1, column=2)
-contrastScale.set(0)
-contrastScale.config(state=DISABLED)
+	sharpnessLabel = Label(sharpnessFrame, text="Sharpness", bg=backGround, fg=foreGround, padx=2)
+	sharpnessLabel.grid(row=1, column=1)
 
-contrastCheck = Checkbutton(contrastFrame, bg=backGround, fg=foreGround, text="Auto", command=ContrastCMD, variable=contrastActivate)
-contrastCheck.grid(row=1, column=3)
-contrastCheck.select()
+	sharpnessScale = Scale(sharpnessFrame, length=300, from_=-100, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=SharpnessCMD)
+	sharpnessScale.grid(row=1, column=2)
+	sharpnessScale.set(0)
+	sharpnessScale.config(state=DISABLED)
 
-
-brightnessFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
-brightnessFrame.grid(row=3, column=1, columnspan=2)
-
-brightnessLabel = Label(brightnessFrame, text="Brightness", bg=backGround, fg=foreGround)
-brightnessLabel.grid(row=1, column=1)
-
-brightnessScale = Scale(brightnessFrame, length=300, from_=0, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=BrightnessCMD)
-brightnessScale.grid(row=1, column=2)
-brightnessScale.set(50)
-brightnessScale.config(state=DISABLED)
-
-brightnessCheck = Checkbutton(brightnessFrame, bg=backGround, fg=foreGround, text="Auto", command=BrightnessCMD, variable=brightnessActivate)
-brightnessCheck.grid(row=1, column=3)
-brightnessCheck.select()
+	sharpnessCheck = Checkbutton(sharpnessFrame, bg=backGround, fg=foreGround, text="Auto", command=SharpnessCMD, variable=sharpnessActivate)
+	sharpnessCheck.grid(row=1, column=3)
+	sharpnessCheck.select()
 
 
-saturationFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
-saturationFrame.grid(row=4, column=1, columnspan=2)
+	contrastFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
+	contrastFrame.grid(row=2, column=1, columnspan=2)
 
-saturationLabel = Label(saturationFrame, text="Saturation", bg=backGround, fg=foreGround, padx=1)
-saturationLabel.grid(row=1, column=1)
+	contrastLabel = Label(contrastFrame, text="Contrast", bg=backGround, fg=foreGround, padx=6)
+	contrastLabel.grid(row=1, column=1)
 
-saturationScale = Scale(saturationFrame, length=300, from_=-100, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=SaturationCMD)
-saturationScale.grid(row=1, column=2)
-saturationScale.set(0)
-saturationScale.config(state=DISABLED)
+	contrastScale = Scale(contrastFrame, length=300, from_=-100, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=ContrastCMD)
+	contrastScale.grid(row=1, column=2)
+	contrastScale.set(0)
+	contrastScale.config(state=DISABLED)
 
-saturationCheck = Checkbutton(saturationFrame, bg=backGround, fg=foreGround, text="Auto", command=SaturationCMD, variable=saturationActivate)
-saturationCheck.grid(row=1, column=3)
-saturationCheck.select()
-
-
-isoFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
-isoFrame.grid(row=5, column=1, columnspan=2)
-
-isoLabel = Label(isoFrame, text="ISO", bg=backGround, fg=foreGround, padx=19)
-isoLabel.grid(row=1, column=1)
-
-isoScale = Scale(isoFrame, length=300, from_=100, to=800, resolution=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=ISOCMD)
-isoScale.grid(row=1, column=2)
-isoScale.config(state=DISABLED)
-
-isoCheck = Checkbutton(isoFrame, bg=backGround, fg=foreGround, text="Auto", command=ISOCMD, variable=isoActivate)
-isoCheck.grid(row=1, column=3)
-isoCheck.select()
+	contrastCheck = Checkbutton(contrastFrame, bg=backGround, fg=foreGround, text="Auto", command=ContrastCMD, variable=contrastActivate)
+	contrastCheck.grid(row=1, column=3)
+	contrastCheck.select()
 
 
-openCamera = Button(view, text="Camera", bg=backGround, fg=foreGround, command=lambda:camera.start_preview(), bd=7)
-openCamera.grid(row=6, column=1)
+	brightnessFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
+	brightnessFrame.grid(row=3, column=1, columnspan=2)
 
-quitCamera = Button(view, text="Quit", bg=backGround, fg=foreGround, command=Destroy, bd=7)
-quitCamera.grid(row=6, column=2)
-print('mainloop')
-window.mainloop()
+	brightnessLabel = Label(brightnessFrame, text="Brightness", bg=backGround, fg=foreGround)
+	brightnessLabel.grid(row=1, column=1)
+
+	brightnessScale = Scale(brightnessFrame, length=300, from_=0, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=BrightnessCMD)
+	brightnessScale.grid(row=1, column=2)
+	brightnessScale.set(50)
+	brightnessScale.config(state=DISABLED)
+
+	brightnessCheck = Checkbutton(brightnessFrame, bg=backGround, fg=foreGround, text="Auto", command=BrightnessCMD, variable=brightnessActivate)
+	brightnessCheck.grid(row=1, column=3)
+	brightnessCheck.select()
+
+
+	saturationFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
+	saturationFrame.grid(row=4, column=1, columnspan=2)
+
+	saturationLabel = Label(saturationFrame, text="Saturation", bg=backGround, fg=foreGround, padx=1)
+	saturationLabel.grid(row=1, column=1)
+
+	saturationScale = Scale(saturationFrame, length=300, from_=-100, to=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=SaturationCMD)
+	saturationScale.grid(row=1, column=2)
+	saturationScale.set(0)
+	saturationScale.config(state=DISABLED)
+
+	saturationCheck = Checkbutton(saturationFrame, bg=backGround, fg=foreGround, text="Auto", command=SaturationCMD, variable=saturationActivate)
+	saturationCheck.grid(row=1, column=3)
+	saturationCheck.select()
+
+
+	isoFrame = Frame(view, bg=backGround, relief=SUNKEN, bd=2)
+	isoFrame.grid(row=5, column=1, columnspan=2)
+
+	isoLabel = Label(isoFrame, text="ISO", bg=backGround, fg=foreGround, padx=19)
+	isoLabel.grid(row=1, column=1)
+
+	isoScale = Scale(isoFrame, length=300, from_=100, to=800, resolution=100, bg=backGround, fg=foreGround, orient=HORIZONTAL, command=ISOCMD)
+	isoScale.grid(row=1, column=2)
+	isoScale.config(state=DISABLED)
+
+	isoCheck = Checkbutton(isoFrame, bg=backGround, fg=foreGround, text="Auto", command=ISOCMD, variable=isoActivate)
+	isoCheck.grid(row=1, column=3)
+	isoCheck.select()
+
+
+	openCamera = Button(view, text="Camera", bg=backGround, fg=foreGround, command=lambda:camera.start_preview(), bd=7)
+	openCamera.grid(row=6, column=1)
+
+	quitCamera = Button(view, text="Quit", bg=backGround, fg=foreGround, command=Destroy, bd=7)
+	quitCamera.grid(row=6, column=2)
+	print('mainloop')
+	window.mainloop()
+
 main()
