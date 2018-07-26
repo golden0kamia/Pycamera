@@ -28,7 +28,31 @@ backGround = "black"
 foreGround = "red"
 vFlag = False
 
-    
+def main():
+    print('start program')
+    while True:
+        if GPIO.input(5):
+            print('5 pressed')
+            if vFlag:
+                cmera.stop_recording()
+                vFlag = False
+            else:
+                sd = 0
+                while GPIO.input(5):
+                    sleep(0.1)
+                    sd = sd+1
+                    if sd >= 15:
+                        break
+                if sd >= 15:
+                    camera.start_recording("%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), 'mjpeg')
+                    vFlag = True
+                else:
+                    camera.capture("%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
+                    print('take photo')
+
+    if not GPIO.input(3):
+        print('3 pressed')
+        camera.quit_preview
 def SharpnessCMD(value = 0):
     global sharpnessString
     if sharpnessActivate.get():
@@ -180,28 +204,4 @@ quitCamera = Button(view, text="Quit", bg=backGround, fg=foreGround, command=Des
 quitCamera.grid(row=6, column=2)
 print('mainloop')
 window.mainloop()
-print('start program')
-while True:
-    if GPIO.input(5):
-        print('5 pressed')
-        if vFlag:
-            cmera.stop_recording()
-            vFlag = False
-        else:
-            sd = 0
-            while GPIO.input(5):
-                sleep(0.1)
-                sd = sd+1
-                if sd >= 15:
-                    break
-            if sd >= 15:
-                camera.start_recording("%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), 'mjpeg')
-                vFlag = True
-            else:
-                camera.capture("%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
-                print('take photo')
-
-    if not GPIO.input(3):
-        print('3 pressed')
-        camera.quit_preview
-
+main()
