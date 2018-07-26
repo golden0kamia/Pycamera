@@ -29,7 +29,7 @@ foreGround = "red"
 vFlag = False
 
 def main():
-	startdisplay()
+    startdisplay()
     print('start program')
     while True:
         if GPIO.input(5):
