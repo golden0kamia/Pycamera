@@ -180,7 +180,6 @@ quitCamera = Button(view, text="Quit", bg=backGround, fg=foreGround, command=Des
 quitCamera.grid(row=6, column=2)
 print('mainloop')
 window.mainloop()
-
 print('start program')
 while True:
     if GPIO.input(5):
