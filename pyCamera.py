@@ -185,6 +185,7 @@ window.mainloop()
 
 while True:
     if GPIO.input(5):
+        print('5 pressed')
         if vFlag:
             cmera.stop_recording()
             vFlag = False
@@ -200,7 +201,9 @@ while True:
                 vFlag = True
             else:
                 camera.capture("%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
+                print('take photo')
 
     if not GPIO.input(3):
+        print('3 pressed')
         camera.quit_preview
 
