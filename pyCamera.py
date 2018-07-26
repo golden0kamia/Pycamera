@@ -76,32 +76,37 @@ def ISOCMD(value = 0):
         camera.iso = isoScale.get()
 
 def preview():
+    global vFlag
     print('start program')
-	prev = True
+    camera.start_preview()
+    prev = True
     while prev:
         if GPIO.input(5):
             print('5 pressed')
             if vFlag:
-                cmera.stop_recording()
+                camera.stop_recording()
                 vFlag = False
+                print('stop video')
             else:
                 sd = 0
                 while GPIO.input(5):
                     sleep(0.1)
                     sd = sd+1
                     if sd >= 15:
-                    break
+                        break
                 if sd >= 15:
-                    camera.start_recording("%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), 'mjpeg')
+                    camera.start_recording("movies/%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), 'mjpeg')
                     vFlag = True
+                    print('start video')
                 else:
-                    camera.capture("%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
+                    camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
                     print('take photo')
-
+            while GPIO.input(5):
+                pass
         if not GPIO.input(3):
             print('3 pressed')
-            camera.quit_preview
-			prev = False
+            camera.stop_preview()
+            prev = False
 
 def Destroy():
 	print("Quit")
@@ -202,7 +207,7 @@ isoCheck.grid(row=1, column=3)
 isoCheck.select()
 
 
-openCamera = Button(view, text="Camera", bg=backGround, fg=foreGround, command=preview(), bd=7)
+openCamera = Button(view, text="Camera", bg=backGround, fg=foreGround, command=preview, bd=7)
 openCamera.grid(row=6, column=1)
 
 quitCamera = Button(view, text="Quit", bg=backGround, fg=foreGround, command=Destroy, bd=7)
