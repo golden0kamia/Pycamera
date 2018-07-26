@@ -178,7 +178,7 @@ openCamera.grid(row=6, column=1)
 
 quitCamera = Button(view, text="Quit", bg=backGround, fg=foreGround, command=Destroy, bd=7)
 quitCamera.grid(row=6, column=2)
-
+print('mainloop')
 window.mainloop()
 
 print('start program')
