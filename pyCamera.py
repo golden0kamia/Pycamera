@@ -13,7 +13,7 @@ try:
     GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     print('check button are not pressed and connected')
-    while GPIO.input(5) and GPIO.input(3):
+    while GPIO.input(5) and not GPIO.input(3):
         pass
     print('Start program')
 except:
@@ -82,7 +82,7 @@ def Destroy():
 	quit()
 
 window = Tk()
-#window.attributes('-fullscreen', True)
+window.attributes('-fullscreen', True)
 
 sharpnessActivate = BooleanVar()
 contrastActivate = BooleanVar()
@@ -199,6 +199,6 @@ while True:
             else:
                 camera.capture("%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
 
-    if GPIO.input(3):
+    if not GPIO.input(3):
         camera.quit_preview
 
