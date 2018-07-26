@@ -181,6 +181,7 @@ quitCamera.grid(row=6, column=2)
 
 window.mainloop()
 
+print('start program')
 while True:
     if GPIO.input(5):
         print('5 pressed')
@@ -190,7 +191,7 @@ while True:
         else:
             sd = 0
             while GPIO.input(5):
-                sleep(100)
+                sleep(0.1)
                 sd = sd+1
                 if sd >= 15:
                     break
