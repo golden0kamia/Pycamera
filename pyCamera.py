@@ -81,7 +81,7 @@ def preview():
     camera.start_preview()
     prev = True
     while prev:
-        if GPIO.input(5):
+        if not GPIO.input(3):
             print('5 pressed')
             if vFlag:
                 camera.stop_recording()
@@ -89,7 +89,7 @@ def preview():
                 print('stop video')
             else:
                 sd = 0
-                while GPIO.input(5):
+                while not GPIO.input(3):
                     sleep(0.1)
                     sd = sd+1
                     if sd >= 15:
@@ -101,9 +101,9 @@ def preview():
                 else:
                     camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
                     print('take photo')
-            while GPIO.input(5):
+            while not GPIO.input(3):
                 pass
-        if not GPIO.input(3):
+        if GPIO.input(5):
             print('3 pressed')
             camera.stop_preview()
             prev = False
