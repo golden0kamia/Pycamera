@@ -76,37 +76,40 @@ def ISOCMD(value = 0):
         camera.iso = isoScale.get()
 
 def preview():
-    global vFlag
-    print('start program')
-    camera.start_preview()
-    prev = True
-    while prev:
-        if not GPIO.input(3):
-            print('5 pressed')
-            if vFlag:
-                camera.stop_recording()
-                vFlag = False
-                print('stop video')
-            else:
-                sd = 0
-                while not GPIO.input(3):
-                    sleep(0.1)
-                    sd = sd+1
-                    if sd >= 15:
-                        break
-                if sd >= 15:
-                    camera.start_recording("movies/%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), 'mjpeg')
-                    vFlag = True
-                    print('start video')
+    try:
+        global vFlag
+        print('start program')
+        camera.start_preview()
+        prev = True
+        while prev:
+            if not GPIO.input(3):
+                print('5 pressed')
+                if vFlag:
+                    camera.stop_recording()
+                    vFlag = False
+                    print('stop video')
                 else:
-                    camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
-                    print('take photo')
-            while not GPIO.input(3):
-                pass
-        if GPIO.input(5):
-            print('3 pressed')
-            camera.stop_preview()
-            prev = False
+                    sd = 0
+                    while not GPIO.input(3):
+                        sleep(0.1)
+                        sd = sd+1
+                        if sd >= 15:
+                            break
+                    if sd >= 15:
+                        camera.start_recording("movies/%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), 'mjpeg')
+                        vFlag = True
+                        print('start video')
+                    else:
+                        camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
+                        print('take photo')
+                while not GPIO.input(3):
+                    pass
+            if GPIO.input(5):
+                print('3 pressed')
+                camera.stop_preview()
+                prev = False
+    except:
+        print("error in camera")
 
 def Destroy():
 	print("Quit")
