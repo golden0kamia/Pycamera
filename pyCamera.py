@@ -96,20 +96,20 @@ def preview():
                         if sd >= 15:
                             break
                     if sd >= 15:
-                        camera.start_recording("movies/%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), 'mjpeg')
+                        camera.start_recording("movies/%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), format='rgb')
                         vFlag = True
                         print('start video')
                     else:
-                        camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), 'png')
+                        camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), format='rgb')
                         print('take photo')
                 while not GPIO.input(3):
                     pass
-            if GPIO.input(5):
-                print('3 pressed')
-                camera.stop_preview()
-                prev = False
     except:
         print("error in camera")
+    if GPIO.input(5):
+        print('3 pressed')
+        camera.stop_preview()
+        prev = False
 
 def Destroy():
 	print("Quit")
