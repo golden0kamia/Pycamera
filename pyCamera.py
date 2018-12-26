@@ -101,7 +101,7 @@ def preview():
                             break
                     if sd >= 15:
                         print("start recording")
-                        camera.start_recording("movies/%s.mp4" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), format='h264')
+                        camera.start_recording("movies/%s.h264" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), format='h264')
                         vFlag = True
                     else:
                         print("capture photo")
