@@ -13,14 +13,15 @@ try:
     GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     print('Press capture')
-    while GPIO.input(5):
-        pass
-    print('Press Back')
     while not GPIO.input(3):
         pass
+    print('Press Back')
+    while GPIO.input(5):
+        pass
     print('Start program')
-except:
+except Exception as error:
     print('error while setting up the raspberry')
+    print(error)
 
 sharpnessString = ""
 contrastString = ""
@@ -88,9 +89,9 @@ def preview():
             if GPIO.input(3):
                 print('5 pressed')
                 if vFlag:
+                    print("stop recording")
                     camera.stop_recording()
                     vFlag = False
-                    print('stop video')
                 else:
                     sd = 0
                     while GPIO.input(3):
@@ -99,20 +100,21 @@ def preview():
                         if sd >= 15:
                             break
                     if sd >= 15:
+                        print("start recording")
                         camera.start_recording("movies/%s.mjpeg" %datetime.now().strftime('%Y-%m-%d_%H:%M:%S'), format='rgb')
                         vFlag = True
-                        print('start video')
                     else:
+                        print("capture photo")
                         camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), format='rgb')
-                        print('take photo')
                 while GPIO.input(3):
                     pass
             if not GPIO.input(5):
                 print('3 pressed')
                 camera.stop_preview()
                 prev = False
-    except:
+    except Exception as error:
         print("error in camera")
+        print(error)
         Destroy()
 
 def Destroy():
