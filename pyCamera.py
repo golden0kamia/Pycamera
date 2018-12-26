@@ -13,7 +13,7 @@ try:
     GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     print('check button are not pressed and connected')
-    while GPIO.input(5):
+    while GPIO.input(3):
         pass
     print('Start program')
 except:
@@ -104,12 +104,12 @@ def preview():
                         print('take photo')
                 while not GPIO.input(3):
                     pass
+            if GPIO.input(5):
+                print('3 pressed')
+                camera.stop_preview()
+                prev = False
     except:
         print("error in camera")
-    if GPIO.input(5):
-        print('3 pressed')
-        camera.stop_preview()
-        prev = False
 
 def Destroy():
 	print("Quit")
