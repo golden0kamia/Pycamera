@@ -12,8 +12,11 @@ try:
     GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-    print('check button are not pressed and connected')
-    while GPIO.input(3):
+    print('Press capture')
+    while GPIO.input(5):
+        pass
+    print('Press Back')
+    while not GPIO.input(3):
         pass
     print('Start program')
 except:
@@ -82,7 +85,7 @@ def preview():
         camera.start_preview()
         prev = True
         while prev:
-            if not GPIO.input(3):
+            if GPIO.input(3):
                 print('5 pressed')
                 if vFlag:
                     camera.stop_recording()
@@ -90,7 +93,7 @@ def preview():
                     print('stop video')
                 else:
                     sd = 0
-                    while not GPIO.input(3):
+                    while GPIO.input(3):
                         sleep(0.1)
                         sd = sd+1
                         if sd >= 15:
@@ -102,14 +105,15 @@ def preview():
                     else:
                         camera.capture("pictures/%s.png" %datetime.now().strftime('%Y.%m.%d_%H:%M:%S'), format='rgb')
                         print('take photo')
-                while not GPIO.input(3):
+                while GPIO.input(3):
                     pass
-            if GPIO.input(5):
+            if not GPIO.input(5):
                 print('3 pressed')
                 camera.stop_preview()
                 prev = False
     except:
         print("error in camera")
+        Destroy()
 
 def Destroy():
 	print("Quit")
